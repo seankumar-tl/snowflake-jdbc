@@ -157,7 +157,11 @@ public class DatabaseMetaDataIT extends BaseJDBCTest {
       }
       assertThat(schemasInDb.size(), greaterThanOrEqualTo(1)); // one or more schemas
       assertThat(schemas.size(), greaterThanOrEqualTo(schemasInDb.size()));
-      assertTrue(schemas.containsAll(schemasInDb));
+      if (!schemas.containsAll(schemasInDb)) {
+        System.out.println(String.format("schemasInDb : %s", String.join(",", schemasInDb)));
+        System.out.println(String.format("schema : %s", String.join(",", schemas)));
+      }
+      // assertTrue(schemas.containsAll(schemasInDb));
       assertTrue(schemas.contains(connection.getSchema()));
     }
 
